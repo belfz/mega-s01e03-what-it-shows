@@ -1,0 +1,39 @@
+---
+layout: runbook
+title: '0002 · Proposed dedupe by verified cause'
+owner: belfz with Codex
+status: proposed
+reviewed: 2026-10-28
+signature: 'v1.eyJzdWIiOiIyMjkiLCJhdWQiOiJjaGFsbGVuZ2U6d2hhdC1pdC1zaG93cyIsImlhdCI6MTc5MzE5NTU1NywiZXhwIjoxNzkzMjgxOTU3fQ.ZZuJugex3juLzWyrrcqDOPlIMO5tojaVNL7zaK9p8pQ'
+---
+
+<script>
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+## Context
+
+[The #4471 review](/kb/incidents/4471-review/) shows that matching subjects can
+hide separate faults. Different subjects can describe the same fault.
+The executable dedupe component already compares causes while the written rule
+still compares subjects.
+
+## Proposal
+
+Replace decision 0001 only after the support desk accepts this new record.
+Keep the accepted original unchanged for the audit trail.
+
+1. Deduplicate export rows by report ID before counting.
+2. Resolve the tenant's locale, booking form and input channel.
+3. Compare the failure mechanism and reproduction evidence, not just the subject.
+4. Merge only when the cause is established as the same.
+5. Keep unknown tenants and uncertain symptoms in triage until investigated.
+6. Rebuild computed views after new exports. Review stale prose against those views.
+
+## Consequences
+
+The desk must inspect evidence before merging. This costs more triage time but
+keeps separate faults visible to engineering. Intake tags and computed classifications
+are useful leads, not proof that every report has the same reproduced root cause.
+
+<RenderStamp {signature} />

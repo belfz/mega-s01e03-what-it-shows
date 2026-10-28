@@ -1,0 +1,57 @@
+---
+layout: runbook
+title: '#4471 review · split by cause, not subject'
+owner: belfz with Codex
+status: reviewed-export
+reviewed: 2026-10-28
+signature: 'v1.eyJzdWIiOiIyMjkiLCJhdWQiOiJjaGFsbGVuZ2U6d2hhdC1pdC1zaG93cyIsImlhdCI6MTc5MzE5NTU1NywiZXhwIjoxNzkzMjgxOTU3fQ.ZZuJugex3juLzWyrrcqDOPlIMO5tojaVNL7zaK9p8pQ'
+---
+
+<script>
+  import IncidentReview from '#lib/kb/IncidentReview.svelte';
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
+  import DedupeExplorer from '#lib/kb/DedupeExplorer.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+## Finding
+
+The [original incident page](/kb/incidents/4471/) says “one issue, one fix queued”.
+Its own computed table disagrees. The shared parser and the booking-v3 input hint
+are separate faults. A parser-only change does not correct the form's hint.
+
+<IncidentReview />
+
+## What the desk's components actually show
+
+<CauseTable ticket={4471} />
+
+<QueueTimeline ticket={4471} />
+
+## Why the written dedupe rule is unsafe
+
+[Decision 0001](/kb/decisions/0001-dedupe-by-subject/) and the
+[triage page](/kb/triage/dedupe/) say to merge matching subjects and to merge when
+unsure. The live component uses cause, not subject. The accepted decision dates
+from June 2024 and the shared layout marks it stale. “Accepted” does not mean
+recently verified.
+
+For Alder Physio, the same subject through form and app maps to different causes.
+Kettle Books app and email reports can have different subjects but the same cause.
+Unknown tenants have no known cause: do not merge them merely because the subjects match.
+
+<DedupeExplorer />
+
+## Proposed desk action
+
+Keep the two date faults in separate tickets. Investigate unresolved symptoms.
+Use tenant, form, channel and reproduction evidence before merging a report.
+If the cause is unknown, hold it for triage rather than forcing it into #4471.
+Read [proposed decision 0002](/kb/decisions/0002-dedupe-by-cause/) before adopting
+this change. Decision 0001 is preserved, not silently rewritten or declared superseded.
+
+Do not equate “known” or “queued” with fixed. Verify each correction separately.
+This review covers the 4 October 2026 export, not the desk's changing live state.
+
+<RenderStamp {signature} />
