@@ -2,7 +2,7 @@
 layout: runbook
 title: '#4471 review · split by cause, not subject'
 owner: belfz with Codex
-status: reviewed-export
+status: closed
 reviewed: 2026-10-28
 signature: 'v1.eyJzdWIiOiIyMjkiLCJhdWQiOiJjaGFsbGVuZ2U6d2hhdC1pdC1zaG93cyIsImlhdCI6MTc5MzE5NTU1NywiZXhwIjoxNzkzMjgxOTU3fQ.ZZuJugex3juLzWyrrcqDOPlIMO5tojaVNL7zaK9p8pQ'
 ---
@@ -13,7 +13,10 @@ signature: 'v1.eyJzdWIiOiIyMjkiLCJhdWQiOiJjaGFsbGVuZ2U6d2hhdC1pdC1zaG93cyIsImlhd
   import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
   import DedupeExplorer from '#lib/kb/DedupeExplorer.svelte';
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
+  import EngineeringUpdate from '#lib/kb/EngineeringUpdate.svelte';
 </script>
+
+<EngineeringUpdate />
 
 ## Finding
 
@@ -51,7 +54,10 @@ If the cause is unknown, hold it for triage rather than forcing it into #4471.
 Read [proposed decision 0002](/kb/decisions/0002-dedupe-by-cause/) before adopting
 this change. Decision 0001 is preserved, not silently rewritten or declared superseded.
 
-Do not equate “known” or “queued” with fixed. Verify each correction separately.
-This review covers the 4 October 2026 export, not the desk's changing live state.
+Do not equate “known” or “queued” with fixed. Engineering's 5 October update
+reports the parser fixed and the hint not fixed because booking-v3 was retired.
+The two GitHub tickets close for different reasons. No production verification
+was performed by this review. Counts cover the 4 October 2026 export; the later
+engineering outcome is recorded separately above.
 
 <RenderStamp {signature} />

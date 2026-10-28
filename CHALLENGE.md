@@ -46,7 +46,14 @@ component from its exact course-issued frontmatter signature.
 
 ## Limits
 
-The export is dated 4 October 2026. The desk can change after that date.
+The export is dated 4 October 2026. The course later disclosed an engineering
+update: #4471 closed on 5 October. The parser was fixed; the hint was not fixed
+because booking-v3 was retired. Issue #1 closes as completed and issue #2 as
+not planned. The signed review records both outcomes separately from the
+historical counts. The exact reported outcomes are preserved in
+`src/lib/data/engineering-update.json`; this is not a claim of independent
+production verification.
+
 Five anomalous report bodies are retained and explicitly unresolved; their
 tenant/channel classification alone does not establish a reproduced cause.
 The July merge spike is distinguished from the earlier report arrivals.

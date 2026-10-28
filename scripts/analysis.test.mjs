@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
+import fs from 'node:fs';
 import { causeOf, dayFirst, sameCause } from '../src/lib/kb/causes.ts';
 import { deskRef } from '../src/lib/kb/desk-ref.ts';
 import { groups, notes, raw, reports, tenants } from './analysis.mjs';
@@ -36,4 +37,14 @@ test('subjects do not define duplicates and unresolved symptoms remain visible',
 test('desk ref is derived deterministically from a signature', () => {
   assert.match(deskRef('test signature'), /^DR-[0-9A-HJKMNP-TV-Z]{4}-[0-9A-HJKMNP-TV-Z]{4}$/);
   assert.equal(deskRef(' test signature '), deskRef('test signature'));
+});
+
+test('engineering outcomes retain distinct GitHub closure reasons', () => {
+  const update = JSON.parse(fs.readFileSync(new URL('../src/lib/data/engineering-update.json', import.meta.url), 'utf8'));
+  assert.equal(update.closedOn, '2026-10-05');
+  assert.equal(update.outcomes.parser.status, 'fixed');
+  assert.equal(update.outcomes.parser.closureReason, 'completed');
+  assert.equal(update.outcomes.hint.status, "won't fix");
+  assert.equal(update.outcomes.hint.closureReason, 'not planned');
+  assert.equal(update.outcomes.hint.detail, 'booking-v3 form retired');
 });
